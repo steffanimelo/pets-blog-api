@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "joi": "^13.1.0"
   },
   "devDependencies": {
     "kill-port": "^1.6.1",
