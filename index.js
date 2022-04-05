@@ -1,3 +1,4 @@
+const Joi = require("joi");
 const express = require("express");
 const { homedir } = require("os");
 const { resolve } = require("path");
@@ -22,7 +23,16 @@ app.get ("/home/post/:id", (req, res) => {                          //2nd route 
     res.send(post);
 });
 
-app.post ("/home", (req, res) => {
+app.post ("/home", (req, res) => {          
+    const schema = {                               //defining a schema
+        name: Joi.string().min(3).required()       //schema validation using joi
+    };
+    const result = Joi.validate (req.body, schema);
+
+    if (result.error) {                       //finishing validation to the client about name         
+        res.status(400).send(result.error.details [0].message)
+        return;
+    };
     const newPost = {
         id: posts.length + 1,
         name: req.body.name
@@ -30,6 +40,10 @@ app.post ("/home", (req, res) => {
     posts.push(newPost);
     res.send(posts);
 });
+
+
+
+
 
 
 app.listen(port, () =>
