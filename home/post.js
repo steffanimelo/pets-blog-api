@@ -1,2 +1,1 @@
-console.log(`Single Post will be fetched here`)
-);
+console.log(`Single Post will be fetched here`);
